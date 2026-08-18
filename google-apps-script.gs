@@ -144,7 +144,15 @@ function doPost(e) {
   }
 }
 
-function doGet() {
+function doGet(e) {
+  // ?abas=1 -> diagnostico: lista as abas e quantas linhas cada uma tem
+  if (e && e.parameter && e.parameter.abas) {
+    var ss = SpreadsheetApp.openById(SHEET_ID);
+    var info = ss.getSheets().map(function (s) {
+      return { aba: s.getName(), linhas: Math.max(0, s.getLastRow() - 1) };
+    });
+    return resposta_({ ok: true, abas: info });
+  }
   return resposta_({ ok: true, msg: 'LP-Quiz endpoint no ar (Solar + Advoga + Moveis + Food)' });
 }
 
