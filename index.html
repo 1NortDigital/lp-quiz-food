@@ -197,12 +197,12 @@ const CONFIG = {
   valorTop: 100,
   currency: "BRL",
 
-  // QUALIFICAÇÃO: COM kill switch — "Ainda vou abrir minha açaiteria" e "Menos de R$ 20 mil/mês" derrubam o lead.
+  // QUALIFICAÇÃO: COM kill switch — "Ainda vou abrir minha açaiteria" e "Menos de R$ 30 mil/mês" derrubam o lead.
   // O kill do "ainda vou abrir" é o mais importante do nicho: é o maior volume de lead ruim do tráfego de açaí.
   // Lead derrubado ainda cai no Sheets (marcado 'desqualificado'), mas NÃO dispara evento de conversão
   // e NÃO vai pro WhatsApp — assim a campanha não otimiza por loja fora do ICP.
   qualifyThreshold: 1,    // precisa somar pelo menos 1 ponto no caminho
-  topThreshold:    4,     // score máx = 7 (operação 4 + faturamento 3). TOP = multi-loja ou 1 loja faturando +80k
+  topThreshold:    7,     // score máx = 10 (operação 4 + faturamento 3 + investimento 3). TOP = estrutura + faturamento + grana pra investir
 
   // WHATSAPP — lead qualificado cai direto na conversa com mensagem pronta.
   whatsapp: {
@@ -279,13 +279,24 @@ const CONFIG = {
         {ic:"👑",t:"10+ lojas / sou franqueadora",        s:4, next:"faturamento"}
       ] },
 
-    /* QUALIFICATÓRIA 2 — "Menos de R$ 20.000" derruba o lead (kill). Última tela → submit. */
-    { id:"faturamento", type:"single", submit:true, image:"imagens/contratos.jpg", title:"Qual o faturamento mensal da sua açaiteria?",
+    /* QUALIFICATÓRIA 2 — régua subida (2026-08-17): só passa quem fatura ACIMA de R$ 30 mil/mês. */
+    { id:"faturamento", type:"single", image:"imagens/contratos.jpg", title:"Qual o faturamento mensal da sua açaiteria?",
       options:[
-        {ic:"📉",t:"Menos de R$ 20 mil/mês",             s:0, kill:true},
-        {ic:"📊",t:"De R$ 20 mil a R$ 40 mil/mês",       s:1},
-        {ic:"📈",t:"De R$ 40 mil a R$ 80 mil/mês",       s:2},
-        {ic:"🚀",t:"Acima de R$ 80 mil/mês",             s:3}
+        {ic:"📉",t:"Menos de R$ 30 mil/mês",             s:0, kill:true, next:"investimento"},
+        {ic:"📊",t:"De R$ 30 mil a R$ 50 mil/mês",       s:1, next:"investimento"},
+        {ic:"📈",t:"De R$ 50 mil a R$ 80 mil/mês",       s:2, next:"investimento"},
+        {ic:"🚀",t:"Acima de R$ 80 mil/mês",             s:3, next:"investimento"}
+      ] },
+
+    /* PERGUNTA FINAL — investimento como âncora (título) + posicionamento (sub). Sem kill:
+       o objetivo aqui é o dono SABER o investimento médio antes de falar com o comercial. */
+    { id:"investimento", type:"single", submit:true, image:"imagens/time.jpg",
+      title:"<b>+500 pedidos/mês</b> no seu delivery próprio, sem comissão de app — com cerca de <b>R$ 50/dia</b> em anúncios (~R$ 1.500/mês).",
+      sub:"Esse é um ponto de partida que combina com a sua açaiteria?",
+      options:[
+        {ic:"🌱",t:"Quero começar com menos",             s:1},
+        {ic:"✅",t:"É um ponto de partida ideal",         s:2},
+        {ic:"🚀",t:"Quero começar investindo mais!",      s:3}
       ] }
   ]
 };
@@ -424,7 +435,7 @@ const CONFIG = {
           const opt=step.options[+btn.dataset.i];
           lead.respostas[step.id]=opt.t;
           lead.pts[step.id]=opt.s||0;
-          lead.kills[step.id]=opt.kill===true;   // corte (ainda vai abrir / faturamento < R$ 20 mil)
+          lead.kills[step.id]=opt.kill===true;   // corte (ainda vai abrir / faturamento < R$ 30 mil)
           setTimeout(()=>{
             if(step.submit){ maybeShowSocialProof(); }                  // passo final → prova social (qualificado) ou finish
             else { stepHistory.push(currentId); render(opt.next); }
