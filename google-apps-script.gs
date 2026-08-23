@@ -5,6 +5,11 @@
 // PUBLICAR/ATUALIZAR: script.google.com (conta dona da planilha) > cola este arquivo,
 //   confere o SHEET_ID, Ctrl+S > Implantar > Gerenciar implantacoes > editar (lapis)
 //   > Nova versao > Implantar. A URL /exec continua a mesma.
+//
+// ATENCAO: a planilha tem DUAS implantacoes /exec ativas, em versoes diferentes:
+//   AKfycbzYM6CdDzk5...  -> lp-quiz-1nort (Solar) e lp-quiz-advoga
+//   AKfycbydV26wxGU4...  -> lp-quiz-food e lp-quiz-heleva
+//   Repita o 'Nova versao' nas DUAS, senao metade das LPs fica na versao antiga.
 
 var SHEET_ID = '1NABMLnzCLeAOM6TOrmNTpmOHl96cJrogWcSLxkrqU24';
 
@@ -17,14 +22,14 @@ var SCHEMAS = {
       'nome','telefone','email','cidade',
       'papel','projetos','desafio','foco_vendedor','nao_atuo','trafego','instagram',
       'pagina','utm_source','utm_medium','utm_campaign','utm_content',
-      'fbc','fbp','origem','event_id','parcial','respostas_json'
+      'fbc','fbp','origem','event_id','parcial','respostas_json','ref'
     ],
     titulos: [
       'Data/Hora','Tier','Qualificado','Top Tier','Score',
       'Nome','Telefone','Email','Cidade',
       'Papel','Projetos','Desafio','Foco Vendedor','Nao Atua','Trafego','Instagram',
       'Pagina','UTM Source','UTM Medium','UTM Campaign','UTM Content',
-      'FBC','FBP','Origem','Event ID','Parcial','Respostas (JSON)'
+      'FBC','FBP','Origem','Event ID','Parcial','Respostas (JSON)','Ref'
     ]
   },
   advoga: {
@@ -36,7 +41,7 @@ var SCHEMAS = {
       'pagina','utm_source','utm_medium','utm_campaign','utm_content',
       'fbc','fbp','origem','event_id','parcial',
       'desafio','contratos',
-      'respostas_json'
+      'respostas_json','ref'
     ],
     titulos: [
       'Data/Hora','Tier','Qualificado','Top Tier','Score',
@@ -45,7 +50,7 @@ var SCHEMAS = {
       'Pagina','UTM Source','UTM Medium','UTM Campaign','UTM Content',
       'FBC','FBP','Origem','Event ID','Parcial',
       'Desafio','Contratos',
-      'Respostas (JSON)'
+      'Respostas (JSON)','Ref'
     ]
   },
   food: {
@@ -55,14 +60,14 @@ var SCHEMAS = {
       'nome','telefone','email','cidade',
       'desafio','operacao','faturamento',
       'pagina','utm_source','utm_medium','utm_campaign','utm_content',
-      'fbc','fbp','origem','event_id','parcial','respostas_json'
+      'fbc','fbp','origem','event_id','parcial','respostas_json','ref'
     ],
     titulos: [
       'Data/Hora','Tier','Qualificado','Top Tier','Score',
       'Nome','Telefone','Email','Cidade',
       'Desafio','Operacao','Faturamento',
       'Pagina','UTM Source','UTM Medium','UTM Campaign','UTM Content',
-      'FBC','FBP','Origem','Event ID','Parcial','Respostas (JSON)'
+      'FBC','FBP','Origem','Event ID','Parcial','Respostas (JSON)','Ref'
     ]
   },
   moveis: {
@@ -72,14 +77,14 @@ var SCHEMAS = {
       'nome','telefone','email','cidade',
       'desafio','segmento','vendedores','faturamento','investimento',
       'pagina','utm_source','utm_medium','utm_campaign','utm_content',
-      'fbc','fbp','origem','event_id','parcial','respostas_json'
+      'fbc','fbp','origem','event_id','parcial','respostas_json','ref'
     ],
     titulos: [
       'Data/Hora','Tier','Qualificado','Top Tier','Score',
       'Nome','Telefone','Email','Cidade',
       'Desafio','Segmento','Vendedores','Faturamento','Investimento',
       'Pagina','UTM Source','UTM Medium','UTM Campaign','UTM Content',
-      'FBC','FBP','Origem','Event ID','Parcial','Respostas (JSON)'
+      'FBC','FBP','Origem','Event ID','Parcial','Respostas (JSON)','Ref'
     ]
   }
 };
