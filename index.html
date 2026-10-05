@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Playfair+Display:wght@700;900&family=Sora:wght@700;800&display=swap" rel="stylesheet"/>
-<link rel="preload" as="image" href="hero-welcome.webp" type="image/webp"/>
+<link rel="preload" as="image" href="hero-welcome.webp?v=advoga" type="image/webp"/>
 
 <!-- ===================== META PIXEL (base) ===================== -->
 <script>
@@ -197,10 +197,8 @@ const CONFIG = {
   valorTop: 100,
   currency: "BRL",
 
-  // QUALIFICAÇÃO: COM kill switch — "Ainda vou abrir minha açaiteria" e "Menos de R$ 30 mil/mês" derrubam o lead.
-  // O kill do "ainda vou abrir" é o mais importante do nicho: é o maior volume de lead ruim do tráfego de açaí.
-  // Lead derrubado ainda cai no Sheets (marcado 'desqualificado'), mas NÃO dispara evento de conversão
-  // e NÃO vai pro WhatsApp — assim a campanha não otimiza por loja fora do ICP.
+  // QUALIFICAÇÃO: perguntas primeiro, contato por último. Quem ainda não abriu, fatura abaixo
+  // de R$ 30 mil/mês ou não consegue investir encerra o diagnóstico antes do cadastro.
   qualifyThreshold: 1,    // precisa somar pelo menos 1 ponto no caminho
   topThreshold:    7,     // score máx = 10 (operação 4 + faturamento 3 + investimento 3). TOP = estrutura + faturamento + grana pra investir
 
@@ -231,10 +229,10 @@ const CONFIG = {
 
   welcome: {
     eyebrow:"Método 1Nort Food",
-    image:"hero-welcome.jpg",          // TODO Bruno: trocar pela foto de açaiteria quando tiver (700x466)
-    imageWebp:"hero-welcome.webp",
-    title:"Conheça o Método capaz de encher sua açaiteria de <em>PEDIDOS TODOS OS DIAS</em> — no balcão e no delivery!",
-    sub:"Levamos os clientes do seu bairro <b>direto pro seu WhatsApp</b>: mais pedidos todo dia, no seu delivery próprio, <b>sem pagar comissão pro app</b>.",
+    image:"hero-welcome.jpg?v=advoga",
+    imageWebp:"hero-welcome.webp?v=advoga",
+    title:"Aumente as vendas do delivery da sua <em>AÇAÍTERIA</em>",
+    sub:"Descubra como sua açaiteria pode buscar até <b>300 pedidos a mais por mês</b> no delivery.",
     note:"",
     proof:"<b>Açaiterias</b> já escalando com a 1Nort Food",   // TODO Bruno: colocar o número real de lojas atendidas
     cta:"Começar →"
@@ -252,52 +250,63 @@ const CONFIG = {
   },
 
   steps: [
-    /* Tela 1 — contato essencial */
-    { id:"contato", type:"contact", fireContato:true, savePartial:true, contactPicker:true, title:"Vamos começar 👋", sub:"Pra onde enviamos seu diagnóstico?",
-      fields:[
-        { key:"nome",     label:"Seu nome", type:"text", placeholder:"João Silva",           autocomplete:"name" },
-        { key:"telefone", label:"WhatsApp", type:"tel",  placeholder:"(11) 99999-9999",      autocomplete:"tel", prefix:"+55"  }
-      ], trust:true, next:"desafio" },
-
-    /* Engajamento antes das qualificatórias (afinidade + insumo pro comercial). Não pontua. */
-    { id:"desafio", type:"single", title:"Qual o maior desafio da sua açaiteria hoje, {nome}?",
+    /* 1 — Engajamento antes das qualificatórias. */
+    { id:"desafio", type:"single", title:"Qual é o maior desafio da sua açaiteria hoje?",
       options:[
         {ic:"🧊",t:"Movimento fraco, loja vazia durante a semana",  s:0, next:"operacao"},
         {ic:"🛵",t:"Dependo do iFood e a comissão come meu lucro",  s:0, next:"operacao"},
         {ic:"🔁",t:"O cliente compra uma vez e não volta",          s:0, next:"operacao"},
         {ic:"📉",t:"No inverno minha venda despenca",               s:0, next:"operacao"},
-        {ic:"🚀",t:"Já vendo bem, quero abrir mais lojas",          s:0, next:"operacao"}
+        {ic:"🚀",t:"Já vendo bem, quero vender mais",                s:0, next:"operacao"}
       ] },
 
-    /* QUALIFICATÓRIA 1 — "Ainda vou abrir" derruba o lead (kill). É o maior volume de lead ruim do nicho. */
+    /* 2 — Operação. Quem ainda vai abrir encerra antes do cadastro. */
     { id:"operacao", type:"single", image:"imagens/time.jpg", title:"Como está a sua operação hoje?",
       options:[
-        {ic:"🧑‍🍳",t:"Ainda vou abrir minha açaiteria",   s:0, kill:true, next:"faturamento"},
+        {ic:"🧑‍🍳",t:"Ainda vou abrir minha açaiteria",   s:0, kill:true, next:"nurture_operacao"},
         {ic:"🏪",t:"Tenho 1 açaiteria",                   s:1, next:"faturamento"},
         {ic:"🏬",t:"Tenho 2 a 3 açaiterias",              s:2, next:"faturamento"},
         {ic:"🏙️",t:"Tenho 4 a 9 açaiterias",              s:3, next:"faturamento"},
         {ic:"👑",t:"10+ lojas / sou franqueadora",        s:4, next:"faturamento"}
       ] },
 
-    /* QUALIFICATÓRIA 2 — régua subida (2026-08-17): só passa quem fatura ACIMA de R$ 30 mil/mês. */
+    /* 3 — Faturamento. Só avança quem fatura a partir de R$ 30 mil/mês. */
     { id:"faturamento", type:"single", image:"imagens/contratos.jpg", title:"Qual o faturamento mensal da sua açaiteria?",
       options:[
-        {ic:"📉",t:"Menos de R$ 30 mil/mês",             s:0, kill:true, next:"investimento"},
+        {ic:"📉",t:"Menos de R$ 30 mil/mês",             s:0, kill:true, next:"nurture_faturamento"},
         {ic:"📊",t:"De R$ 30 mil a R$ 50 mil/mês",       s:1, next:"investimento"},
         {ic:"📈",t:"De R$ 50 mil a R$ 80 mil/mês",       s:2, next:"investimento"},
         {ic:"🚀",t:"Acima de R$ 80 mil/mês",             s:3, next:"investimento"}
       ] },
 
-    /* PERGUNTA FINAL — investimento como âncora (título) + posicionamento (sub). Sem kill:
-       o objetivo aqui é o dono SABER o investimento médio antes de falar com o comercial. */
-    { id:"investimento", type:"single", submit:true, image:"imagens/time.jpg",
-      title:"<b>+500 pedidos/mês</b> no seu delivery próprio, sem comissão de app — com cerca de <b>R$ 50/dia</b> em anúncios (~R$ 1.500/mês).",
-      sub:"Esse é um ponto de partida que combina com a sua açaiteria?",
+    /* 4 — Investimento direto, no mesmo modelo de qualificação do Advoga. */
+    { id:"investimento", type:"single", image:"imagens/time.jpg",
+      title:"Você consegue investir cerca de R$ 1.500 por mês em anúncios para aumentar as vendas do seu delivery?",
+      sub:"Esse valor é destinado à mídia e não inclui a assessoria da 1Nort Food.",
       options:[
-        {ic:"🌱",t:"Quero começar com menos",             s:1},
-        {ic:"✅",t:"É um ponto de partida ideal",         s:2},
-        {ic:"🚀",t:"Quero começar investindo mais!",      s:3}
-      ] }
+        {ic:"✅",t:"Sim, consigo investir nessa faixa",   s:2, next:"contato"},
+        {ic:"🚀",t:"Consigo investir mais para acelerar", s:3, next:"contato"},
+        {ic:"🌱",t:"Não consigo investir agora",          s:0, kill:true, next:"nurture_investimento"}
+      ] },
+
+    /* 5 — Contato por último, depois de todas as perguntas. */
+    { id:"contato", type:"contact", fireContato:true, submit:true, contactPicker:true,
+      title:"Último passo 👋", sub:"Pra onde enviamos seu diagnóstico?",
+      fields:[
+        { key:"nome",     label:"Seu nome", type:"text", placeholder:"João Silva",      autocomplete:"name" },
+        { key:"telefone", label:"WhatsApp", type:"tel",  placeholder:"(11) 99999-9999", autocomplete:"tel", prefix:"+55" }
+      ], trust:true },
+
+    /* Telas terminais para quem ainda não está no momento da parceria. */
+    { id:"nurture_operacao", type:"end", terminal:true,
+      title:"Sua açaiteria ainda está no começo 🙌",
+      sub:"A 1Nort Food trabalha com operações que já estão vendendo. Quando sua loja estiver em funcionamento, volte e refaça o diagnóstico." },
+    { id:"nurture_faturamento", type:"end", terminal:true,
+      title:"Ainda não é o melhor momento 🙌",
+      sub:"Hoje a parceria é indicada para açaiterias que já faturam a partir de R$ 30 mil por mês. Quando chegar nessa faixa, volte e refaça o diagnóstico." },
+    { id:"nurture_investimento", type:"end", terminal:true,
+      title:"Valeu pela honestidade 🙌",
+      sub:"Para gerar volume de pedidos com previsibilidade, os anúncios precisam de investimento suficiente para o algoritmo aprender. Quando puder investir nessa faixa, volte e refaça o diagnóstico." }
   ]
 };
 
@@ -438,7 +447,7 @@ const CONFIG = {
           return `<div class="field"><label class="label" for="f_${f.key}">${f.label}</label>${campo}<div class="err-msg"></div></div>`;
         }).join('')}</form>
         ${step.trust?`<div class="trust"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4v5c0 5-3.5 9-8 11-4.5-2-8-6-8-11V6l8-4z" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linejoin="round"/></svg> Seus dados estão seguros · sem spam</div>`:''}
-        <button class="btn" id="okBtn">Continuar →</button>
+        <button class="btn" id="okBtn">${step.submit?'Quero meu diagnóstico →':'Continuar →'}</button>
         <button class="back" id="backBtn">← Voltar</button></div>`;
       updateProgress();
       host.querySelectorAll('.input').forEach(el=>{ const k=el.dataset.key; if(lead[k]) el.value=lead[k]; }); // pré-preenche (volta/contatos)
@@ -470,6 +479,16 @@ const CONFIG = {
         };
       });
       const b=document.getElementById('backBtn'); if(b) b.onclick=goBack;
+    }
+    else if(step.type==='end'){
+      computeScore();
+      disarmRetention();
+      host.innerHTML = `<div class="screen active">
+        <div class="success-ic">👋</div>
+        <div class="success-t">${px(step.title)}</div>
+        ${step.sub?`<p class="success-s">${px(step.sub)}</p>`:''}
+      </div>`;
+      setProg(100);
     }
     else if(step.type==='text'){
       computeScore();   // avalia qualificação (score + kill) antes de decidir o botão de WhatsApp
@@ -515,14 +534,15 @@ const CONFIG = {
     inputs.forEach(f=>{ lead[f.dataset.key]=f.value.trim(); });
     setAdvancedMatching();
     if(step.fireContato) fireEvent(CONFIG.eventoContato);
-    if(step.savePartial) sendWebhook(true);   // #3 — salva nome+telefone na hora
+    if(step.submit){ maybeShowSocialProof(); return; }
+    if(step.savePartial) sendWebhook(true);
     stepHistory.push(currentId); render(step.next);
   }
 
   function goBack(){ const prev=stepHistory.pop(); if(prev) render(prev); else renderWelcome(); }
 
   function updateProgress(){
-    const total = CONFIG.steps.length;   // quiz linear (sem ramificação)
+    const total = CONFIG.steps.filter(s=>s.type!=='end').length;
     setProg(Math.min(96, Math.round((stepHistory.length+1)/total*100)));
   }
 
