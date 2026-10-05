@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Playfair+Display:wght@700;900&family=Sora:wght@700;800&display=swap" rel="stylesheet"/>
-<link rel="preload" as="image" href="hero-welcome.webp?v=resultado" type="image/webp"/>
+<link rel="preload" as="image" href="hero-welcome.webp?v=equipe" type="image/webp"/>
 
 <!-- ===================== META PIXEL (base) ===================== -->
 <script>
@@ -43,7 +43,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
 .screen.active{display:block}
 @keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
-.w-hero{width:100%;height:clamp(360px,55vh,500px);object-fit:contain;object-position:center;background:#12051d;border-radius:16px;display:block;margin-bottom:12px;border:1px solid var(--line)}
+.w-hero{width:100%;height:clamp(200px,30vh,280px);object-fit:cover;object-position:center 22%;border-radius:16px;display:block;margin-bottom:12px;border:1px solid var(--line)}
 .q-hero{width:100%;height:clamp(200px,30vh,280px);object-fit:cover;object-position:center 18%;border-radius:14px;display:block;margin-bottom:12px;border:1px solid var(--line)}
 .greet{font-size:14px;font-weight:700;color:var(--acai);margin-bottom:6px;letter-spacing:.01em}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--acai);margin-bottom:20px}
@@ -148,7 +148,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
 
 @media(max-width:560px){
   .brand{top:10px} .logo{height:38px} .stage{padding:60px 16px 18px}
-  .w-hero{height:clamp(320px,52vh,440px);margin-bottom:10px}
+  .w-hero{height:clamp(170px,24vh,210px);margin-bottom:10px}
   .q-hero{height:clamp(180px,24vh,220px);margin-bottom:10px;object-position:center 15%}
   .w-title{font-size:clamp(25px,6.5vw,32px);margin-bottom:14px;line-height:1.2}
   .w-sub{font-size:16px;line-height:1.7;margin-bottom:16px}
@@ -229,8 +229,8 @@ const CONFIG = {
 
   welcome: {
     eyebrow:"Método 1Nort Food",
-    image:"hero-welcome.jpg?v=resultado",
-    imageWebp:"hero-welcome.webp?v=resultado",
+    image:"hero-welcome.jpg?v=equipe",
+    imageWebp:"hero-welcome.webp?v=equipe",
     title:"Aumente as vendas do delivery da sua <em>AÇAÍTERIA</em>",
     sub:"Descubra como sua açaiteria pode buscar até <b>300 pedidos a mais por mês</b> no delivery.",
     note:"",
