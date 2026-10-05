@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Playfair+Display:wght@700;900&family=Sora:wght@700;800&display=swap" rel="stylesheet"/>
-<link rel="preload" as="image" href="hero-welcome.webp?v=advoga" type="image/webp"/>
+<link rel="preload" as="image" href="hero-welcome.webp?v=resultado" type="image/webp"/>
 
 <!-- ===================== META PIXEL (base) ===================== -->
 <script>
@@ -43,7 +43,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
 .screen.active{display:block}
 @keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
-.w-hero{width:100%;height:clamp(200px,30vh,280px);object-fit:cover;object-position:center 22%;border-radius:16px;display:block;margin-bottom:12px;border:1px solid var(--line)}
+.w-hero{width:100%;height:clamp(360px,55vh,500px);object-fit:contain;object-position:center;background:#12051d;border-radius:16px;display:block;margin-bottom:12px;border:1px solid var(--line)}
 .q-hero{width:100%;height:clamp(200px,30vh,280px);object-fit:cover;object-position:center 18%;border-radius:14px;display:block;margin-bottom:12px;border:1px solid var(--line)}
 .greet{font-size:14px;font-weight:700;color:var(--acai);margin-bottom:6px;letter-spacing:.01em}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--acai);margin-bottom:20px}
@@ -148,7 +148,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
 
 @media(max-width:560px){
   .brand{top:10px} .logo{height:38px} .stage{padding:60px 16px 18px}
-  .w-hero{height:clamp(170px,24vh,210px);margin-bottom:10px}
+  .w-hero{height:clamp(320px,52vh,440px);margin-bottom:10px}
   .q-hero{height:clamp(180px,24vh,220px);margin-bottom:10px;object-position:center 15%}
   .w-title{font-size:clamp(25px,6.5vw,32px);margin-bottom:14px;line-height:1.2}
   .w-sub{font-size:16px;line-height:1.7;margin-bottom:16px}
@@ -229,8 +229,8 @@ const CONFIG = {
 
   welcome: {
     eyebrow:"Método 1Nort Food",
-    image:"hero-welcome.jpg?v=advoga",
-    imageWebp:"hero-welcome.webp?v=advoga",
+    image:"hero-welcome.jpg?v=resultado",
+    imageWebp:"hero-welcome.webp?v=resultado",
     title:"Aumente as vendas do delivery da sua <em>AÇAÍTERIA</em>",
     sub:"Descubra como sua açaiteria pode buscar até <b>300 pedidos a mais por mês</b> no delivery.",
     note:"",
@@ -253,24 +253,14 @@ const CONFIG = {
     /* 1 — Engajamento antes das qualificatórias. */
     { id:"desafio", type:"single", title:"Qual é o maior desafio da sua açaiteria hoje?",
       options:[
-        {ic:"🧊",t:"Movimento fraco, loja vazia durante a semana",  s:0, next:"operacao"},
-        {ic:"🛵",t:"Dependo do iFood e a comissão come meu lucro",  s:0, next:"operacao"},
-        {ic:"🔁",t:"O cliente compra uma vez e não volta",          s:0, next:"operacao"},
-        {ic:"📉",t:"No inverno minha venda despenca",               s:0, next:"operacao"},
-        {ic:"🚀",t:"Já vendo bem, quero vender mais",                s:0, next:"operacao"}
+        {ic:"🧊",t:"Movimento fraco, loja vazia durante a semana",  s:0, next:"faturamento"},
+        {ic:"🛵",t:"Dependo do iFood e a comissão come meu lucro",  s:0, next:"faturamento"},
+        {ic:"🔁",t:"O cliente compra uma vez e não volta",          s:0, next:"faturamento"},
+        {ic:"📉",t:"No inverno minha venda despenca",               s:0, next:"faturamento"},
+        {ic:"🚀",t:"Já vendo bem, quero vender mais",                s:0, next:"faturamento"}
       ] },
 
-    /* 2 — Operação. Quem ainda vai abrir encerra antes do cadastro. */
-    { id:"operacao", type:"single", image:"imagens/time.jpg", title:"Como está a sua operação hoje?",
-      options:[
-        {ic:"🧑‍🍳",t:"Ainda vou abrir minha açaiteria",   s:0, kill:true, next:"nurture_operacao"},
-        {ic:"🏪",t:"Tenho 1 açaiteria",                   s:1, next:"faturamento"},
-        {ic:"🏬",t:"Tenho 2 a 3 açaiterias",              s:2, next:"faturamento"},
-        {ic:"🏙️",t:"Tenho 4 a 9 açaiterias",              s:3, next:"faturamento"},
-        {ic:"👑",t:"10+ lojas / sou franqueadora",        s:4, next:"faturamento"}
-      ] },
-
-    /* 3 — Faturamento. Só avança quem fatura a partir de R$ 30 mil/mês. */
+    /* 2 — Faturamento. Só avança quem fatura a partir de R$ 30 mil/mês. */
     { id:"faturamento", type:"single", image:"imagens/contratos.jpg", title:"Qual o faturamento mensal da sua açaiteria?",
       options:[
         {ic:"📉",t:"Menos de R$ 30 mil/mês",             s:0, kill:true, next:"nurture_faturamento"},
@@ -279,17 +269,17 @@ const CONFIG = {
         {ic:"🚀",t:"Acima de R$ 80 mil/mês",             s:3, next:"investimento"}
       ] },
 
-    /* 4 — Investimento direto, no mesmo modelo de qualificação do Advoga. */
+    /* 3 — Investimento direto, no mesmo modelo de qualificação do Advoga. */
     { id:"investimento", type:"single", image:"imagens/time.jpg",
-      title:"Você consegue investir cerca de R$ 1.500 por mês em anúncios para aumentar as vendas do seu delivery?",
+      title:"Você consegue investir a partir de R$ 40 por dia em anúncios para aumentar as vendas do seu delivery?",
       sub:"Esse valor é destinado à mídia e não inclui a assessoria da 1Nort Food.",
       options:[
-        {ic:"✅",t:"Sim, consigo investir nessa faixa",   s:2, next:"contato"},
+        {ic:"✅",t:"Sim, consigo investir a partir de R$ 40 por dia", s:2, next:"contato"},
         {ic:"🚀",t:"Consigo investir mais para acelerar", s:3, next:"contato"},
         {ic:"🌱",t:"Não consigo investir agora",          s:0, kill:true, next:"nurture_investimento"}
       ] },
 
-    /* 5 — Contato por último, depois de todas as perguntas. */
+    /* 4 — Contato por último, depois de todas as perguntas. */
     { id:"contato", type:"contact", fireContato:true, submit:true, contactPicker:true,
       title:"Último passo 👋", sub:"Pra onde enviamos seu diagnóstico?",
       fields:[
@@ -298,9 +288,6 @@ const CONFIG = {
       ], trust:true },
 
     /* Telas terminais para quem ainda não está no momento da parceria. */
-    { id:"nurture_operacao", type:"end", terminal:true,
-      title:"Sua açaiteria ainda está no começo 🙌",
-      sub:"A 1Nort Food trabalha com operações que já estão vendendo. Quando sua loja estiver em funcionamento, volte e refaça o diagnóstico." },
     { id:"nurture_faturamento", type:"end", terminal:true,
       title:"Ainda não é o melhor momento 🙌",
       sub:"Hoje a parceria é indicada para açaiterias que já faturam a partir de R$ 30 mil por mês. Quando chegar nessa faixa, volte e refaça o diagnóstico." },
