@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<meta name="description" content="Diagnóstico gratuito do funil de vendas da sua açaiteria."/>
+<meta name="description" content="A 1Nort Food cria campanhas para atrair clientes da sua região e transformar cliques em pedidos no delivery da sua açaiteria."/>
 <title>Diagnóstico 1Nort Food</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -97,6 +97,29 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
 .opt-dot{width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.28);flex-shrink:0;transition:all .16s;margin-left:auto}
 .opt.sel .opt-dot{border-color:var(--acai);background:var(--acai);box-shadow:inset 0 0 0 5px var(--bg)}
 
+/* case real — aumenta a consciência antes de pedir os dados */
+.stage:has(.case-screen){align-items:flex-start}
+.stage:has(.case-screen) .wrap{max-width:920px}
+.case-screen{padding:18px 0 8px}
+.case-screen .q-title{font-size:clamp(28px,4.5vw,46px);max-width:760px;line-height:1.13;margin-bottom:12px}
+.case-screen .q-sub{font-size:clamp(15px,2vw,18px);max-width:820px;margin-bottom:20px}
+.case-process{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 30px}
+.case-process-item{display:grid;grid-template-columns:40px 1fr;gap:11px;padding:15px;border:1px solid rgba(168,85,247,.2);border-radius:15px;background:rgba(255,255,255,.035)}
+.case-process-ic{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(168,85,247,.15);font-size:20px}
+.case-process-item h3{font-size:14px;line-height:1.3;margin:1px 0 5px}
+.case-process-item p{font-size:12.5px;line-height:1.48;color:var(--txt-dim)}
+.case-proof{margin-bottom:13px}
+.case-proof-label{display:block;color:var(--acai);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}
+.case-proof h2{font-family:'Sora','Plus Jakarta Sans',sans-serif;font-size:clamp(23px,3.5vw,34px);line-height:1.18;letter-spacing:-.015em;margin-bottom:7px}
+.case-proof p{color:var(--txt-dim);font-size:14px;line-height:1.55}
+.case-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 16px}
+.case-metric{padding:16px;border:1px solid rgba(168,85,247,.25);border-radius:15px;background:linear-gradient(135deg,rgba(168,85,247,.12),rgba(255,255,255,.035))}
+.case-metric strong{display:block;font-family:'Sora','Plus Jakarta Sans',sans-serif;font-size:clamp(19px,3vw,29px);line-height:1.15;color:#fff;margin-bottom:5px}
+.case-metric span{display:block;font-size:12.5px;font-weight:700;color:var(--txt-dim)}
+.case-media{overflow:hidden;border-radius:17px;border:1px solid rgba(168,85,247,.28);background:#fff;box-shadow:0 22px 60px rgba(0,0,0,.42),0 0 40px rgba(168,85,247,.08)}
+.case-media img{width:100%;height:auto;display:block}
+.case-screen .btn{max-width:350px;margin-top:20px}
+
 .btn{width:100%;padding:15px;border-radius:14px;font-size:16px;font-weight:800;cursor:pointer;border:none;font-family:inherit;margin-top:10px;transition:filter .18s,transform .18s;background:linear-gradient(135deg,var(--acai-d),var(--acai));color:#fff}
 .btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
 .back{background:none;border:none;font-size:13px;color:var(--txt-faint);cursor:pointer;padding:16px 0 0;font-family:inherit;display:block;width:100%;text-align:center}
@@ -155,6 +178,50 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
   .greet{font-size:14px;margin-bottom:6px}
   .btn{margin-top:8px;padding:14px}
   .proof{margin-top:10px;padding-top:8px;font-size:12px}
+  .case-screen{padding-top:4px}
+  .case-screen .q-step{margin-bottom:6px}
+  .case-screen .q-title{font-size:25px;line-height:1.08;margin-bottom:7px}
+  .case-screen .q-sub{font-size:13.5px;line-height:1.4;margin-bottom:11px}
+  .case-process{grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px}
+  .case-process-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:9px 6px;text-align:center}
+  .case-process-ic{width:32px;height:32px;border-radius:9px;font-size:17px}
+  .case-process-item h3{font-size:11px;line-height:1.2;margin:0}
+  .case-process-item p{display:none}
+  .case-proof{margin-bottom:8px}
+  .case-proof-label{font-size:9.5px;margin-bottom:4px}
+  .case-proof h2{font-size:20px;line-height:1.12;margin-bottom:0}
+  .case-proof p{display:none}
+  .case-metrics{grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
+  .case-metric{padding:9px 8px}
+  .case-metric strong{font-size:15.5px;margin-bottom:3px;white-space:nowrap}
+  .case-metric span{font-size:9.5px;line-height:1.25}
+  .case-media{border-radius:12px}
+  .case-screen .btn{max-width:none;margin-top:11px;padding:13px}
+  .case-screen .back{padding-top:9px}
+}
+@media(max-width:560px) and (max-height:720px){
+  .brand{top:5px}
+  .wordmark{font-size:21px;line-height:38px}
+  .wordmark i{font-size:16px}
+  .stage{padding:43px 12px 6px}
+  .case-screen{padding:0}
+  .case-screen .q-step{display:none}
+  .case-screen .q-title{font-size:21px;line-height:1.05;margin-bottom:5px}
+  .case-screen .q-sub{font-size:12px;line-height:1.28;margin-bottom:7px}
+  .case-process{gap:5px;margin-bottom:8px}
+  .case-process-item{gap:3px;padding:5px 3px;border-radius:10px}
+  .case-process-ic{width:24px;height:24px;border-radius:7px;font-size:13px}
+  .case-process-item h3{font-size:9px;line-height:1.1}
+  .case-proof{margin-bottom:5px}
+  .case-proof-label{font-size:8px;margin-bottom:2px}
+  .case-proof h2{font-size:17px;line-height:1.08}
+  .case-metrics{gap:5px;margin-bottom:7px}
+  .case-metric{padding:6px}
+  .case-metric strong{font-size:13px;margin-bottom:2px}
+  .case-metric span{font-size:8px;line-height:1.15}
+  .case-media{max-width:300px;margin:0 auto}
+  .case-screen .btn{margin-top:7px;padding:10px;font-size:14px}
+  .case-screen .back{padding-top:4px;font-size:11px}
 }
 </style>
 </head>
@@ -197,10 +264,10 @@ const CONFIG = {
   valorTop: 100,
   currency: "BRL",
 
-  // QUALIFICAÇÃO: perguntas primeiro, contato por último. Quem ainda não abriu, fatura abaixo
-  // de R$ 30 mil/mês ou não consegue investir encerra o diagnóstico antes do cadastro.
+  // QUALIFICAÇÃO: perguntas primeiro, contato por último. Quem fatura abaixo de
+  // R$ 30 mil/mês encerra o diagnóstico antes do cadastro.
   qualifyThreshold: 1,    // precisa somar pelo menos 1 ponto no caminho
-  topThreshold:    7,     // score máx = 10 (operação 4 + faturamento 3 + investimento 3). TOP = estrutura + faturamento + grana pra investir
+  topThreshold:    3,     // score máx = 3 (faturamento). TOP = acima de R$ 80 mil/mês
 
   // WHATSAPP — lead qualificado cai direto na conversa com mensagem pronta.
   whatsapp: {
@@ -232,7 +299,7 @@ const CONFIG = {
     image:"hero-welcome.jpg?v=equipe",
     imageWebp:"hero-welcome.webp?v=equipe",
     title:"Aumente as vendas do delivery da sua <em>AÇAÍTERIA</em>",
-    sub:"Descubra como sua açaiteria pode buscar até <b>300 pedidos a mais por mês</b> no delivery.",
+    sub:"A 1Nort Food cria as campanhas, atrai clientes da sua região e transforma cliques em pedidos — para sua açaiteria buscar até <b>300 pedidos a mais por mês</b> no delivery.",
     note:"",
     proof:"<b>Açaiterias</b> já escalando com a 1Nort Food",   // TODO Bruno: colocar o número real de lojas atendidas
     cta:"Começar →"
@@ -264,22 +331,33 @@ const CONFIG = {
     { id:"faturamento", type:"single", image:"imagens/contratos.jpg", title:"Qual o faturamento mensal da sua açaiteria?",
       options:[
         {ic:"📉",t:"Menos de R$ 30 mil/mês",             s:0, kill:true, next:"nurture_faturamento"},
-        {ic:"📊",t:"De R$ 30 mil a R$ 50 mil/mês",       s:1, next:"investimento"},
-        {ic:"📈",t:"De R$ 50 mil a R$ 80 mil/mês",       s:2, next:"investimento"},
-        {ic:"🚀",t:"Acima de R$ 80 mil/mês",             s:3, next:"investimento"}
+        {ic:"📊",t:"De R$ 30 mil a R$ 50 mil/mês",       s:1, next:"case"},
+        {ic:"📈",t:"De R$ 50 mil a R$ 80 mil/mês",       s:2, next:"case"},
+        {ic:"🚀",t:"Acima de R$ 80 mil/mês",             s:3, next:"case"}
       ] },
 
-    /* 3 — Investimento direto, no mesmo modelo de qualificação do Advoga. */
-    { id:"investimento", type:"single", image:"imagens/time.jpg",
-      title:"Você consegue investir a partir de R$ 40 por dia em anúncios para aumentar as vendas do seu delivery?",
-      sub:"Esse valor é destinado à mídia e não inclui a assessoria da 1Nort Food.",
-      options:[
-        {ic:"✅",t:"Sim, consigo investir a partir de R$ 40 por dia", s:2, next:"contato"},
-        {ic:"🚀",t:"Consigo investir mais para acelerar", s:3, next:"contato"},
-        {ic:"🌱",t:"Não consigo investir agora",          s:0, kill:true, next:"nurture_investimento"}
-      ] },
+    /* 3 — Case real: prova o potencial antes do cadastro. */
+    { id:"case", type:"case",
+      eyebrow:"Como geramos vendas",
+      title:"Tráfego pago para levar mais clientes ao seu cardápio e aumentar as vendas do delivery.",
+      sub:"Anunciamos seus produtos para pessoas da região e levamos o clique direto ao seu cardápio para comprar.",
+      process:[
+        {ic:"📍", title:"Divulgação local", desc:"Alcançamos quem pode comprar de você."},
+        {ic:"🥤", title:"Oferta em destaque", desc:"Impulsionamos produtos, combos e promoções."},
+        {ic:"📈", title:"Mais pedidos", desc:"Otimizamos as campanhas para vender mais."}
+      ],
+      proofLabel:"Case real com R$ 1.867,97 em mídia paga",
+      proofTitle:"R$ 49 mil em vendas e 1.242 pedidos.",
+      image:"imagens/case-food-vendas.png",
+      imageAlt:"Painel do case 1Nort Food com R$ 49.276,92 em vendas e 1.242 pedidos",
+      metrics:[
+        {value:"R$ 49.276,92", label:"em vendas"},
+        {value:"1.242", label:"pedidos registrados"},
+        {value:"R$ 1.867,97", label:"em investimento patrocinado"}
+      ],
+      cta:"Quero vender mais também →", next:"contato" },
 
-    /* 4 — Contato por último, depois de todas as perguntas. */
+    /* 4 — Contato por último, depois das perguntas e da entrega de valor. */
     { id:"contato", type:"contact", fireContato:true, submit:true, contactPicker:true,
       title:"Último passo 👋", sub:"Pra onde enviamos seu diagnóstico?",
       fields:[
@@ -290,10 +368,7 @@ const CONFIG = {
     /* Telas terminais para quem ainda não está no momento da parceria. */
     { id:"nurture_faturamento", type:"end", terminal:true,
       title:"Ainda não é o melhor momento 🙌",
-      sub:"Hoje a parceria é indicada para açaiterias que já faturam a partir de R$ 30 mil por mês. Quando chegar nessa faixa, volte e refaça o diagnóstico." },
-    { id:"nurture_investimento", type:"end", terminal:true,
-      title:"Valeu pela honestidade 🙌",
-      sub:"Para gerar volume de pedidos com previsibilidade, os anúncios precisam de investimento suficiente para o algoritmo aprender. Quando puder investir nessa faixa, volte e refaça o diagnóstico." }
+      sub:"Hoje a parceria é indicada para açaiterias que já faturam a partir de R$ 30 mil por mês. Quando chegar nessa faixa, volte e refaça o diagnóstico." }
   ]
 };
 
@@ -444,6 +519,27 @@ const CONFIG = {
       const cb=document.getElementById('contactsBtn'); if(cb) cb.onclick=pickContacts;
       enhance(submit);
     }
+    else if(step.type==='case'){
+      host.innerHTML = `<div class="screen active case-screen">
+        <div class="q-step">${step.eyebrow||'Case real'}</div>
+        <div class="q-title">${px(step.title)}</div>${step.sub?`<div class="q-sub">${px(step.sub)}</div>`:''}
+        <div class="case-process">${step.process.map(item=>`<article class="case-process-item">
+          <div class="case-process-ic">${item.ic||'✓'}</div>
+          <div><h3>${item.title}</h3><p>${item.desc}</p></div>
+        </article>`).join('')}</div>
+        <div class="case-proof">
+          <span class="case-proof-label">${step.proofLabel||'Case real'}</span>
+          <h2>${step.proofTitle||''}</h2>
+          ${step.proofSub?`<p>${step.proofSub}</p>`:''}
+        </div>
+        <div class="case-metrics">${step.metrics.map(item=>`<div class="case-metric"><strong>${item.value}</strong><span>${item.label}</span></div>`).join('')}</div>
+        <div class="case-media"><img src="${step.image}" alt="${step.imageAlt||'Resultado de um cliente 1Nort Food'}" loading="lazy" decoding="async"></div>
+        <button class="btn" id="okBtn">${step.cta||'Continuar →'}</button>
+        <button class="back" id="backBtn">← Voltar</button></div>`;
+      updateProgress();
+      document.getElementById('okBtn').onclick = ()=>{ stepHistory.push(currentId); render(step.next); };
+      document.getElementById('backBtn').onclick = goBack;
+    }
     else if(step.type==='single'){
       host.innerHTML = `<div class="screen active">
         ${step.image?`<img class="q-hero" src="${step.image}" alt="" loading="lazy" decoding="async">`:''}
@@ -458,7 +554,7 @@ const CONFIG = {
           const opt=step.options[+btn.dataset.i];
           lead.respostas[step.id]=opt.t;
           lead.pts[step.id]=opt.s||0;
-          lead.kills[step.id]=opt.kill===true;   // corte (ainda vai abrir / faturamento < R$ 30 mil)
+          lead.kills[step.id]=opt.kill===true;   // corte: faturamento abaixo de R$ 30 mil
           setTimeout(()=>{
             if(step.submit){ maybeShowSocialProof(); }                  // passo final → prova social (qualificado) ou finish
             else { stepHistory.push(currentId); render(opt.next); }
