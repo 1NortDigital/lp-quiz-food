@@ -636,10 +636,11 @@ const CONFIG = {
     fbq('init', CONFIG.pixelId, am);
   }
   function fireEvent(name, custom){
+    if(!name || lead.firedEvents.some(e=>e.event_name===name)) return;
     // mesmo event_id (base) pro navegador e pra CAPI → Meta deduplica por (event_name + event_id)
     lead.firedEvents.push({ event_name:name, event_id:eventId, custom_data:custom||{} });
     if(!window.fbq || CONFIG.pixelId.indexOf("COLOQUE")>=0){ console.log('[pixel mock]',name,custom||{},'| qualified:',lead.qualified,'| score:',lead.score,'| top:',lead.top); return; }
-    fbq('track', name, custom||{}, { eventID:eventId });
+    fbq('trackCustom', name, custom||{}, { eventID:eventId });
   }
   // Envio que SOBREVIVE ao redirect (sendBeacon é entregue mesmo com a página saindo).
   // Corrige o bug de lead perdido no Sheets quando redireciona pro WhatsApp (mobile/iOS).
