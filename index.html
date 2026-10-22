@@ -228,7 +228,7 @@ const CONFIG = {
 
   steps: [
     /* 1 — Mesmas faixas usadas no formulário de cadastro. */
-    { id:"faturamento", type:"single", title:"Faturamento mensal estimado da sua loja?",
+    { id:"faturamento", type:"single", image:"imagens/contratos.webp", imageAlt:"Especialista da 1Nort em um ambiente de trabalho", imagePosition:"center 30%", title:"Faturamento mensal estimado da sua loja?",
       options:[
         {ic:"📉",t:"Menos de 20 mil", s:0, next:"tempo_operacao"},
         {ic:"📊",t:"De 20 a 50 mil",  s:1, next:"tempo_operacao"},
@@ -237,7 +237,7 @@ const CONFIG = {
       ] },
 
     /* 2 — Tempo de operação. Todas as opções avançam. */
-    { id:"tempo_operacao", type:"single", title:"Tempo de operação?",
+    { id:"tempo_operacao", type:"single", image:"imagens/time.webp", imageAlt:"Equipe da 1Nort reunida", imagePosition:"center 38%", title:"Tempo de operação?",
       options:[
         {ic:"🌱",t:"Começando agora",    s:0, next:"instagram"},
         {ic:"🗓️",t:"Menos de 6 meses",  s:1, next:"instagram"},
@@ -246,11 +246,11 @@ const CONFIG = {
       ] },
 
     /* 3 — Identificação da loja, como no cadastro. */
-    { id:"instagram", type:"text", title:"Qual o nome da sua loja no Instagram?",
+    { id:"instagram", type:"text", image:"imagens/contratos.webp", imageAlt:"Equipe da 1Nort trabalhando nas campanhas", imagePosition:"center 30%", title:"Qual o nome da sua loja no Instagram?",
       field:{ placeholder:"@nomedasualoja" }, next:"investimento" },
 
     /* 4 — Pergunta final sobre tráfego. Nenhuma resposta elimina o lead. */
-    { id:"investimento", type:"single",
+    { id:"investimento", type:"single", image:"imagens/time.webp", imageAlt:"Equipe responsável pela estratégia da 1Nort", imagePosition:"center 38%",
       title:"Você consegue investir cerca de R$ 1.500 por mês em tráfego pago para aumentar as vendas do seu delivery?",
       sub:"Esse valor é destinado à mídia e não inclui a assessoria da 1Nort Food.",
       options:[
@@ -415,7 +415,7 @@ const CONFIG = {
     }
     else if(step.type==='single'){
       host.innerHTML = `<div class="screen active">
-        ${step.image?`<img class="q-hero" src="${step.image}" alt="" loading="lazy" decoding="async">`:''}
+        ${step.image?`<img class="q-hero" src="${step.image}" alt="${step.imageAlt||''}" style="object-position:${step.imagePosition||'center 18%'}" loading="lazy" decoding="async">`:''}
         <div class="q-step">Etapa ${stepHistory.length+1}</div>
         <div class="q-title">${px(step.title)}</div>${step.sub?`<div class="q-sub">${px(step.sub)}</div>`:''}
         <div class="opts">${step.options.map((o,i)=>`<button class="opt" data-i="${i}">${o.ic?`<span class="opt-ic">${o.ic}</span>`:''}<span>${o.t}</span><span class="opt-dot"></span></button>`).join('')}</div>
@@ -450,6 +450,7 @@ const CONFIG = {
       computeScore();   // avalia qualificação (score + kill) antes de decidir o botão de WhatsApp
       const showWpp = step.submit && lead.qualified===true && !!buildWhatsappLink();
       host.innerHTML = `<div class="screen active">
+        ${step.image?`<img class="q-hero" src="${step.image}" alt="${step.imageAlt||''}" style="object-position:${step.imagePosition||'center 18%'}" loading="lazy" decoding="async">`:''}
         <div class="q-step">Quase lá</div>
         <div class="q-title">${px(step.title)}</div>
         <div class="field"><input class="input" id="f_text" type="text" placeholder="${step.field.placeholder}" autocomplete="off" autofocus></div>
