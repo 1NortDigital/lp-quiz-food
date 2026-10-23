@@ -59,6 +59,7 @@ var SCHEMAS = {
       'data_hora','tier','qualificado','top_tier','score',
       'nome','telefone','email','cidade',
       'desafio','operacao','faturamento',
+      'tempo_operacao','instagram','investimento',
       'pagina','utm_source','utm_medium','utm_campaign','utm_content',
       'fbc','fbp','origem','event_id','parcial','respostas_json','ref'
     ],
@@ -66,6 +67,7 @@ var SCHEMAS = {
       'Data/Hora','Tier','Qualificado','Top Tier','Score',
       'Nome','Telefone','Email','Cidade',
       'Desafio','Operacao','Faturamento',
+      'Tempo de Operacao','Instagram','Investimento em Trafego',
       'Pagina','UTM Source','UTM Medium','UTM Campaign','UTM Content',
       'FBC','FBP','Origem','Event ID','Parcial','Respostas (JSON)','Ref'
     ]
@@ -124,6 +126,7 @@ function doPost(e) {
     }
 
     var sheet = pegarAba_(schema.aba);
+    if (schema === SCHEMAS.food) garantirColunasFood_(sheet);
     garantirCabecalho_(sheet, schema.titulos);
 
     var valores = schema.colunas.map(function(c){ return valueFor_(c, d, r); });
@@ -147,6 +150,24 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+}
+
+// Migra a aba Food sem deslocar nem sobrescrever o histórico existente.
+// As três colunas novas entram antes de "Pagina"; os metadados antigos são
+// deslocados automaticamente pelo Sheets. A função é idempotente.
+function garantirColunasFood_(sheet) {
+  var lastColumn = sheet.getLastColumn();
+  if (lastColumn < 1) return;
+
+  var headers = sheet.getRange(1, 1, 1, lastColumn).getValues()[0];
+  if (headers.indexOf('Tempo de Operacao') > -1 &&
+      headers.indexOf('Instagram') > -1 &&
+      headers.indexOf('Investimento em Trafego') > -1) return;
+
+  var paginaIndex = headers.indexOf('Pagina');
+  if (paginaIndex < 0) return; // planilha nova: garantirCabecalho_ cria tudo
+
+  sheet.insertColumnsBefore(paginaIndex + 1, 3);
 }
 
 function doGet(e) {

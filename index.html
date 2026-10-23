@@ -546,6 +546,10 @@ const CONFIG = {
     const payload = Object.assign({
       pagina:CONFIG.pagina, event_id:eventId, ref:refCode,
       nome:lead.nome||'', telefone:lead.telefone||'', email:lead.email||'', cidade:lead.cidade||'',
+      faturamento:lead.respostas.faturamento||'',
+      tempo_operacao:lead.respostas.tempo_operacao||'',
+      instagram:lead.respostas.instagram||'',
+      investimento:lead.respostas.investimento||'',
       papel:lead.papel, qualificado:lead.qualified===true,
       score:lead.score, top_tier:lead.top===true,
       tier: parcial ? 'parcial' : (lead.qualified===true ? (lead.top?'top':'qualificado') : 'desqualificado'),
